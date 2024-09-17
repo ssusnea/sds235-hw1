@@ -1,0 +1,36 @@
+---
+title: "Visualizations"
+format: html
+---
+
+```{r}
+library(ggplot2)
+data <- read_csv("Voter_Registry_clean.csv")
+```
+
+```{r}
+ggplot(data = data, aes(x = PARTY)) + geom_bar()
+```
+
+# take out the year of voter reg date in order to create visualization
+```{r}
+library(lubridate)
+data$year <- year(data$`VOTER REG DATE`)
+```
+
+# create the database for the first visualization
+```{r}
+data_vis1 <- data |>
+  filter(is.na(`STREET NAME`),
+         year >= 1990)
+
+data_vis1$year <- as.factor(data_vis1$year)
+```
+
+# create a barplot
+```{r}
+ggplot(data = data_vis1, aes(x = year, fill = PARTY)) + geom_bar()
+```
+
+
+
