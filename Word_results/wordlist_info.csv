@@ -1,0 +1,2 @@
+search_query,search_with_words,search_with_case,search_with_regex,min_freq,min_range,use_context,use_sql,context_search_query,context_search_with_words,context_search_with_case,context_search_with_regex,context_span_left,context_span_right,context_not_in_context,context_or_condition,search_sql_query,type_count,token_count,file_count,list_type
+,1,0,0,1,1,0,0,,1,0,0,5,5,0,1,"""""",21245,1185085,1,type

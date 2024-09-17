@@ -1,0 +1,2 @@
+full_name,short_name,file_count,token_count,type_count,encoding,token_definition,number_replace,format,indexer_type,indexer
+temp,temp,1,1185085,24998,utf_8_sig,[\p{L}]+,False,raw_files,word,simple_word_indexer
