@@ -1,0 +1,37 @@
+---
+title: "data cleaning"
+author: "Cindy"
+format: html
+---
+```{r}
+library(readxl)
+data_raw <- read_excel("Voter Registry.xls")
+data_clean <- data_raw
+```
+
+```{r}
+library(dplyr)
+data_clean |>
+  group_by(PARTY) |>
+  summarize(n = n())
+```
+
+```{r}
+library(stringr)
+data_clean$`FIRST NAME` <- toupper(data_clean$`FIRST NAME`)
+data_clean$PARTY <- str_to_title(data_clean$PARTY)
+data_clean$POB <- str_to_title(data_clean$POB)
+data_clean$`STREET NAME` <- str_to_title(data_clean$`STREET NAME`)
+data_clean$SEX <- str_to_title(data_clean$SEX)
+```
+
+```{r}
+data_clean$DOB <- as.Date(data_clean$DOB)
+data_clean$`VOTER REG DATE` <- as.Date(data_clean$`VOTER REG DATE`)
+```
+
+```{r}
+write.csv(data_clean, file = "Voter_Registry_clean.csv", row.names = FALSE)
+```
+
+
