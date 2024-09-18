@@ -1,0 +1,33 @@
+---
+title: "word cloud"
+format: html
+---
+
+```{r}
+library(readr)
+library(dplyr)
+wordlist <- read_csv("Word_results/wordlist.csv")
+```
+
+```{r}
+wordlist$type <- tolower(wordlist$type)
+```
+
+```{r}
+wordlist_clean <- wordlist |>
+  filter(type %in% c("cow", "bse", "disease", "monson", "lab", "boynton", "council", "luthor", "alderwood", "state", "school", "students", "community", "valley", "district", "yakima", "washington", "mabton", "county", "board", "program", "local", "public", "budget", "business", "prosser", "residents", "church", "president", "police", "property", "fair", "college", "tax", "rockford", "martinez", "club", "election", "food", "library", "park", "fire", "bovine", "angel"))
+```
+
+```{r}
+# Load necessary libraries
+library(wordcloud)
+
+# Create the word cloud
+wordcloud(words = wordlist_clean$type, freq = wordlist_clean$freq, min.freq = 1,
+          scale = c(3, 0.5), max.words = 100, random.order = FALSE,
+          colors = brewer.pal(8, "Dark2"))
+```
+
+
+
+
