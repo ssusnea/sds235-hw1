@@ -29,14 +29,14 @@ data_vis1 <- data |>
 
 # create a barplot
 ```{r}
-ggplot(data = data_vis1, aes(x = as.factor(year_vote), fill = PARTY)) +
+ggplot(data = data_vis1, aes(x = as.factor(year_vote), fill = PARTY), color = "black") +
   geom_bar() +
-  scale_fill_manual(values = c("blue", "green", "purple", "red", "gray"))+
+  scale_fill_manual(values = c("royalblue", "limegreen", "yellow2", "red3", "snow3"))+
   labs(title = "What happened in 2002 and 2003 with people registered to vote?",
        x = "Years",
        y = "Number of people volting",
        fill = "Party") +
-  theme_classic()
+  theme_minimal()
 ```
 
 # try to prove that registration dates did not seem to correspond to the dates of birth listed
@@ -73,6 +73,8 @@ ggplot(data = data_vis2, aes(x = as.factor(years_old_vote))) +
   geom_bar() + 
   labs(title = "At what age are people registered to vote?",
        x = "Age when people are registered to vote",
-       y = "Number of people")
+       y = "Number of people") +
+  geom_text(stat = 'count', aes(label = after_stat(count)), vjust = -0.5) +
+  theme_minimal()
 ```
 
