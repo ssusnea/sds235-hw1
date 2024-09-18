@@ -15,22 +15,58 @@ ggplot(data = data, aes(x = PARTY)) + geom_bar()
 # take out the year of voter reg date in order to create visualization
 ```{r}
 library(lubridate)
-data$year <- year(data$`VOTER REG DATE`)
+data$year_vote <- year(data$`VOTER REG DATE`)
 ```
 
 # create the database for the first visualization
 ```{r}
 data_vis1 <- data |>
   filter(is.na(`STREET NAME`),
-         year >= 1990)
-
-data_vis1$year <- as.factor(data_vis1$year)
+         year_vote >= 1990)
 ```
 
 # create a barplot
 ```{r}
-ggplot(data = data_vis1, aes(x = year, fill = PARTY)) + geom_bar()
+ggplot(data = data_vis1, aes(x = as.factor(year_vote), fill = PARTY)) +
+  geom_bar() +
+  labs(title = "What happened in 2002 and 2003 with people registered to vote?",
+       x = "Years",
+       y = "Number of people volting",
+       fill = "Party")
 ```
 
+# try to prove that registration dates did not seem to correspond to the dates of birth listed
 
+```{r}
+data$year_birth <- year(data$DOB)
+```
+
+```{r}
+plot_year1 <- ggplot(data = data, aes(x = as.factor(year_birth))) + geom_bar()
+```
+
+```{r}
+plot_year2 <- ggplot(data = data, aes(x = as.factor(year_vote))) + geom_bar()
+```
+
+```{r}
+library(patchwork)
+combined_year <- plot_year1 + plot_year2
+combined_year
+```
+
+# Another way
+
+```{r}
+data_vis2 <- data |>
+  mutate(years_old_vote = year_vote - year_birth)
+```
+
+```{r}
+ggplot(data = data_vis2, aes(x = as.factor(years_old_vote))) + 
+  geom_bar() + 
+  labs(title = "At what age are people registered to vote?",
+       x = "Age when people are registered to vote",
+       y = "Number of people")
+```
 
