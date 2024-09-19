@@ -1,7 +1,9 @@
 ---
 title: "Final Report"
 author: "Sian Bareket, Cindy Sun, Sarah Susnea, Yuhan Wang" 
-format: html
+format: 
+  html:
+    self-contained: true
 ---
 
 ```{r, include = F}
@@ -68,7 +70,7 @@ data$year_birth <- year(data$DOB)
 # create df for second visualization
 data_vis2 <- data |>
   mutate(years_old_vote = year_vote - year_birth) |>
-  filter(years_old_vote <= 18)
+  filter(years_old_vote <= 17)
 ```
 
 ```{r, echo = FALSE}
