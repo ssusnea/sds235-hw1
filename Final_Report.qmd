@@ -1,0 +1,86 @@
+---
+title: "Final Report"
+author: "Sian Bareket, Cindy Sun, Sarah Susnea, Yuhan Wang" 
+format: html
+---
+
+```{r, include = F}
+# loading packages
+library(readxl)
+library(tidyverse)
+library(stringr)
+library(ggplot2)
+library(readr)
+library(lubridate)
+
+
+# reading in the data
+data_raw <- read_excel("Voter Registry.xls")
+data_clean <- data_raw
+```
+
+```{r, include = FALSE}
+# cleaning some of the columns: 
+
+data_clean$`FIRST NAME` <- toupper(data_clean$`FIRST NAME`)
+data_clean$PARTY <- str_to_title(data_clean$PARTY)
+data_clean$POB <- str_to_title(data_clean$POB)
+data_clean$`STREET NAME` <- str_to_title(data_clean$`STREET NAME`)
+data_clean$SEX <- str_to_title(data_clean$SEX)
+
+# coercing to date 
+data_clean$DOB <- as.Date(data_clean$DOB)
+data_clean$`VOTER REG DATE` <- as.Date(data_clean$`VOTER REG DATE`)
+
+# saving cleaned df as csv
+write.csv(data_clean, file = "Voter_Registry_clean.csv", row.names = FALSE)
+```
+
+```{r, include = FALSE}
+# reading in the cleaned csv: 
+data <- read_csv("Voter_Registry_clean.csv")
+
+# preparing data for visualization by extracting the year
+data$year_vote <- year(data$`VOTER REG DATE`)
+
+# created manipulated df for visualization
+data_vis1 <- data |>
+  filter(year_vote >= 1990) |>
+  filter(is.na(`STREET NAME`))
+```
+
+```{r, echo = FALSE}
+# create first bar plot 
+ggplot(data = data_vis1, aes(x = as.factor(year_vote), fill = PARTY), color = "black") +
+  geom_bar() +
+  scale_fill_manual(values = c("royalblue", "limegreen", "yellow2", "red3", "snow3"))+
+  labs(title = "Voter Registration for People With No Address",
+       x = "Year",
+       y = "Number of People Registered",
+       fill = "Party") +
+  theme_minimal()
+```
+
+```{r, include = FALSE}
+# get year from date of birth: 
+data$year_birth <- year(data$DOB)
+
+# create df for second visualization
+data_vis2 <- data |>
+  mutate(years_old_vote = year_vote - year_birth) |>
+  filter(years_old_vote <= 18)
+```
+
+```{r, echo = FALSE}
+ggplot(data = data_vis2, aes(x = as.factor(years_old_vote))) + 
+  geom_bar() + 
+  labs(title = "Voter Registration Age",
+       x = "Age",
+       y = "Count") +
+  geom_text(stat = 'count', aes(label = after_stat(count)), vjust = -0.5) +
+  theme_minimal()
+```
+
+
+![](network_diagram.png){width = 50%}
+
