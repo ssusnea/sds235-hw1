@@ -89,8 +89,12 @@ ggplot(data = data_vis2, aes(x = as.factor(years_old_vote), fill = status)) +
   scale_fill_manual(values = c("red3", "snow4"))
 ```
 
+# Introduction
 
-![](network_diagram.png)
+Political corruption through potential fraud and connections to suspicious international stakeholders seems to have played a big part in the downfall of Alderwood. The main players involved in these deceptive activities are shown in the figure below in @fig-network
+
+
+![timeline](network_diagram.png){#fig-network}
 
 
 
