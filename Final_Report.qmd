@@ -52,17 +52,6 @@ data_vis1 <- data |>
   filter(is.na(`STREET NAME`))
 ```
 
-```{r, echo = FALSE}
-# create first bar plot 
-ggplot(data = data_vis1, aes(x = as.factor(year_vote), fill = PARTY), color = "black") +
-  geom_bar() +
-  scale_fill_manual(values = c("royalblue", "limegreen", "yellow2", "red3", "snow3"))+
-  labs(title = "Voter Registration for People With No Address",
-       x = "Year",
-       y = "Number of People Registered",
-       fill = "Party") +
-  theme_minimal()
-```
 
 ```{r, include = FALSE}
 # get year from date of birth: 
@@ -77,17 +66,7 @@ data_vis2 <- data |>
                             TRUE ~ "Legal"))
 ```
 
-```{r, echo = FALSE}
-ggplot(data = data_vis2, aes(x = as.factor(years_old_vote), fill = status)) + 
-  geom_bar() + 
-  labs(title = "At what age are people registered to vote?",
-       x = "Age when people are registered to vote",
-       y = "Number of people",
-       fill = "Voting Status") +
-  geom_text(stat = 'count', aes(label = after_stat(count)), vjust = -0.5) +
-  theme_minimal() +
-  scale_fill_manual(values = c("red3", "snow4"))
-```
+
 
 # Introduction
 
@@ -96,6 +75,60 @@ Political corruption through potential fraud and connections to suspicious inter
 
 ![Network Diagram](network_diagram.png){#fig-network}
 
+Additionally, we have compiled a table listing a timeline of relevant events 
+
+![Table 1](table1.png)
+![Table 2](table2.png)
+
+# Boynton Laboratories
+
+Boynton Laboratories was founded in February 2002 through investments from the Washen Foundation. While Dr. Boynton is the head of this laboratory, two other scientists from Switzerland are often mentioned in the news from the organization: Dr. VonRyker and Dr. Sanderson. The two of them were previously involved with the VonRyker Institute in Switzerland, which was closed down on September 15, 2001, at the conclusion of an investigation by Swiss officials. The one-month-long investigation into the Institute for fraud, breach of bioethics law, and questionable scientific methods. Mayor Rex Luthor has also been connected with the laboratory in multiple different ways, the main one being through the suspicious phone calls to Swiss numbers from city hall and from his public endorsements of the lab. These phone calls took place between January 6th, 2002 and January 26th, 2002. It seems likely that once the VonRyker Institute was shut down, Dr. VonRyker and Dr. Sanderson capitalized off of the outbreak in Aldertown in order to establish a new lab and continue their work. The timing of the phone calls seems to validate this theory as they took place only a month after the first outbreak and a month before the announcement of the lab.
+
+The next section goes into further detail on Mayor Rex Luthor’s ongoing movements in the city and his other potential fraudulent connections.
+
+
+
+# Voter Registry & Annexation Fraud
+
+Mayor Rex Luthor has a history of suspicious political action. On January 20th, 2002, Councilman Tom Seeger brought a resolution to the floor that would censure council members who are late with taxes and fees owed to the city. Mayor Rex Luthor voted against this resolution, stating that he was concerned that city staff would end up having to monitor the financial records of the Council members. This action suggests that he has something to hide within his financial records both as an individual but also in regards to the city. It brings to question if he was the proponent of fraud and financial misconduct within the Alderwood budget. He is often seen in alignment with Bruce Rinz, and it seems that they may be involved in a bigger conspiracy around the annexation requests in Aldertown.
+Bruce Rinz has acted on the city council in many different roles. The most notable in relation to the ongoing fraud in Aldertown is his role as the City Manager in connection with land annexation. On February 5th 2002, Washington annexation laws changed; now, instead of having majority landowners be in agreement for annexation to take place, the majority of voting citizens in the proposed annex area must vote for annexation. As such, we speculate that Bruce Rinz in connection with Rex Luthor worked to conduct voter registration fraud (@fig-plot1), making it easier to annex land and, therefore, increase taxable money for the city. In the end, it would lead to a larger pool of money to be embezzled and used for other suspicious activities.
+As shown in the charts below, there may be over 1000 cases of voter fraud. From September 14, 2002 to July 31, 2003, we found cases where voters were registered without any addresses or even before the legal voting age. While there were a few cases in the early 1980s where people were registered without addresses, the extensive number of cases that occurred in 2003 is highly unlikely. On top of that, some of the ages at which people registered to vote were not only illegal but entirely implausible (e.g. between the age of 0 and -42), see @fig-plot2. These fake voters would directly benefit Rex Luthor and Bruce Rinz in their schemes to annex more land as they started to appear only a few months after the laws changed and the first annexation cases were brought to the town. 
+
+```{r, echo = FALSE}
+#| label: fig-plot1
+#| fig-cap: Voter registration by party
+# create first bar plot 
+ggplot(data = data_vis1, aes(x = as.factor(year_vote), fill = PARTY), color = "black") +
+  geom_bar() +
+  scale_fill_manual(values = c("royalblue", "limegreen", "yellow2", "red3", "snow3"))+
+  labs(title = "Voter Registration for People With No Address",
+       x = "Year",
+       y = "Number of People Registered",
+       fill = "Party") +
+  theme_minimal()
+```
+
+```{r, echo = FALSE}
+#| label: fig-plot2
+#| fig-cap: Voter registration by age below 18
+ggplot(data = data_vis2, aes(x = as.factor(years_old_vote), fill = status)) + 
+  geom_bar() + 
+  labs(title = "Voter Registration Age",
+       x = "Age",
+       y = "Count",
+       fill = "Voting Status") +
+  geom_text(stat = 'count', aes(label = after_stat(count)), vjust = -0.5) +
+  theme_minimal() +
+  scale_fill_manual(values = c("red3", "snow4"))
+```
+
+Bruce Rinz is the face of the annexation movement and has stated support for many annexation cases publicly, even in the face of public concern and backlash. One specific example that seems to align the cases of voter fraud and the annexation movement, is the annexation that took place in September of 2004. In this case one of the neighbors that lived across the street from the property stated that “one of the signees is deceased, one has since moved and one is not a registered voter.” As such, it may be likely that this sort of fraud had taken place in earlier annexation cases.
+
+
+# Political Scandal
+During the 2004 mayoral campaign, Mayor Rex Luthor and Councilman John Torch—Mr. Luthor’s political rival—were the main candidates. Mr. Torch announced his intention to run on July 12, 2003 and continued to gain public support throughout the year. As the 2004 election grew closer, an article was released on February 4th, 2004 about how City Councilman John Torch was a viable contender for the role due to his strong support base and his familiarity with Alderwood citizens.
+A few months afterwards on May 30, 2004, steamy photos of John Torch and Boynton Laboratory spokeswoman Laurel Sulfate were released. Mayor Rex Luthor has direct connections to the Boynton Laboratory, and has been seen with Laurel Sulfate before. This report speculates that he used his connections to the lab to set up this political scandal and pull forward in the election. 
+This had a critical impact on the election. John Torch’s reputation and connections—the main thing that had pushed his campaign forward—never recovered as he had betrayed both his wife and four children. On August 24th, a new article was published stating that Rex Luthor was carrying in the polls, predominantly due to this scandal. We speculate that Mayor Rex Luthor, in an attempt to stay in power, used his connections at the laboratory to create this scandal.
 
 
 
