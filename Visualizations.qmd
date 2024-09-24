@@ -85,6 +85,7 @@ ggplot(data = data_vis2, aes(x = as.factor(years_old_vote), fill = status)) +
 
 # Timeline - not used
 ```{r, echo = FALSE}
+library(timevis)
 timeline_data <- data.frame(
   id      = 1:21,
   content = c("Investigation into Swiss VonRyker Institute", 

@@ -1,9 +1,7 @@
 ---
 title: "Final Report"
 author: "Sian Bareket, Cindy Sun, Sarah Susnea, Yuhan Wang" 
-format: 
-  html:
-    self-contained: true
+format: pdf
 ---
 
 ```{r, include = F}
@@ -77,8 +75,7 @@ Political corruption through potential fraud and connections to suspicious inter
 
 Additionally, we have compiled a table listing a timeline of relevant events 
 
-![Table 1](table1.png)
-![Table 2](table2.png)
+![Table 1](table_combined.png)
 
 # Boynton Laboratories
 
@@ -99,7 +96,7 @@ As shown in the charts below, there may be over 1000 cases of voter fraud. From 
 #| fig-cap: Voter registration by party
 # create first bar plot 
 ggplot(data = data_vis1, aes(x = as.factor(year_vote), fill = PARTY), color = "black") +
-  geom_bar() +
+  geom_bar(position = "dodge2") +
   scale_fill_manual(values = c("royalblue", "limegreen", "yellow2", "red3", "snow3"))+
   labs(title = "Voter Registration for People With No Address",
        x = "Year",
@@ -114,12 +111,14 @@ ggplot(data = data_vis1, aes(x = as.factor(year_vote), fill = PARTY), color = "b
 ggplot(data = data_vis2, aes(x = as.factor(years_old_vote), fill = status)) + 
   geom_bar() + 
   labs(title = "Voter Registration Age",
-       x = "Age",
-       y = "Count",
+       x = "Age When People are Registered to Vote",
+       y = "Number of People Registered",
        fill = "Voting Status") +
   geom_text(stat = 'count', aes(label = after_stat(count)), vjust = -0.5) +
   theme_minimal() +
-  scale_fill_manual(values = c("red3", "snow4"))
+  scale_fill_manual(values = c("red3", "snow4")) +
+  scale_y_continuous(limits = c(0, 50)) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 Bruce Rinz is the face of the annexation movement and has stated support for many annexation cases publicly, even in the face of public concern and backlash. One specific example that seems to align the cases of voter fraud and the annexation movement, is the annexation that took place in September of 2004. In this case one of the neighbors that lived across the street from the property stated that “one of the signees is deceased, one has since moved and one is not a registered voter.” As such, it may be likely that this sort of fraud had taken place in earlier annexation cases.
